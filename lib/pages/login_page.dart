@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_restaurant_app/components/my_button.dart';
 import 'package:new_restaurant_app/components/my_text_field.dart';
 import 'package:new_restaurant_app/services/auth/auth_service.dart';
+import 'package:new_restaurant_app/themes/strings.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
               color: Theme.of(context).colorScheme.inversePrimary,
             ),
             Text(
-              'Food App',
+              Strings.instance.foodApp,
               style: TextStyle(
                   fontSize: 16,
                   color: Theme.of(context).colorScheme.inversePrimary),
@@ -40,19 +41,19 @@ class _LoginPageState extends State<LoginPage> {
             ),
             MyTextField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: Strings.instance.email,
                 obscureText: false),
             const SizedBox(
               height: 10,
             ),
             MyTextField(
                 controller: passwordController,
-                hintText: 'password',
+                hintText: Strings.instance.password,
                 obscureText: true),
             const SizedBox(
               height: 20,
             ),
-            MyButton(onTap: login, text: 'Login'),
+            MyButton(onTap: login, text: Strings.instance.login),
             const SizedBox(
               height: 20,
             ),
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     forgetPw();
                   },
                   child: Text(
-                    'Not a member?',
+                    Strings.instance.notAMember,
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.inversePrimary),
                   ),
@@ -74,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: widget.onTap,
-                  child: Text('Register Now',
+                  child: Text(Strings.instance.registerNow,
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary,
                           fontWeight: FontWeight.bold)),

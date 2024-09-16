@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:new_restaurant_app/components/my_button.dart';
+import 'package:new_restaurant_app/themes/strings.dart';
 
 import 'delivary_progress_page.dart';
 
@@ -25,14 +26,14 @@ class _PaymentPageState extends State<PaymentPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text("Confirmed Payment"),
+          title: Text(Strings.instance.confirmedPayment),
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                Text("card Number : $cardNumber"),
-                Text("Expiry Date : $expiryDate"),
-                Text("Card Holder Name: $cardHolderName"),
-                Text("Cvv Code : $cvvCode"),
+                Text("${Strings.instance.cardNumber} : $cardNumber"),
+                Text("${Strings.instance.expiryDate} : $expiryDate"),
+                Text("${Strings.instance.cardHolderName} : $cardHolderName"),
+                Text("${Strings.instance.cvvCode} : $cvvCode"),
               ],
             ),
           ),
@@ -42,7 +43,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text("Cancel")),
+                child: Text(Strings.instance.cancel)),
 
             // ok
             TextButton(
@@ -54,7 +55,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         builder: (context) => const DeliveryProgressPage(),
                       ));
                 },
-                child: const Text("Ok")),
+                child: Text(Strings.instance.ok)),
           ],
         ),
       );
@@ -82,9 +83,9 @@ class _PaymentPageState extends State<PaymentPage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text(
-          'Checkout',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        title: Text(
+          Strings.instance.checkout,
+          style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -117,7 +118,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
           const Spacer(),
 
-          MyButton(onTap: userTappedPay, text: "Pay Now"),
+          MyButton(onTap: userTappedPay, text: Strings.instance.payNow),
 
           const SizedBox(
             height: 25.0,

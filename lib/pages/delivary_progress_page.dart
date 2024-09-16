@@ -3,6 +3,7 @@ import 'package:new_restaurant_app/components/my_arrow_back.dart';
 import 'package:new_restaurant_app/components/my_receipt.dart';
 import 'package:new_restaurant_app/models/restaurant.dart';
 import 'package:new_restaurant_app/services/firebase/firestor.dart';
+import 'package:new_restaurant_app/themes/strings.dart';
 import 'package:provider/provider.dart';
 
 class DeliveryProgressPage extends StatefulWidget {
@@ -39,9 +40,9 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text(
-          'Delivery In Progress',
-          style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+        title: Text(
+          Strings.instance.deliveryInProgress,
+          style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
         ),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(context),
@@ -88,7 +89,7 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
                     color: Theme.of(context).colorScheme.inversePrimary),
               ),
               Text(
-                "Driver",
+                Strings.instance.driver,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.primary),

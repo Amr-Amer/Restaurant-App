@@ -4,6 +4,7 @@ import 'package:new_restaurant_app/components/my_cart_tile.dart';
 import 'package:new_restaurant_app/models/restaurant.dart';
 import 'package:new_restaurant_app/pages/home_page.dart';
 import 'package:new_restaurant_app/pages/payment_page.dart';
+import 'package:new_restaurant_app/themes/strings.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
@@ -20,51 +21,44 @@ class CartPage extends StatelessWidget {
           appBar: AppBar(
             actions: [
               IconButton(
-                padding: const EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 onPressed: () {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title:
-                          const Text("Are you Sure you want to clear the cart"),
+                      title: Text(
+                          Strings.instance.areYouSureYouWantToClearTheCart),
                       actions: [
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: const Text("Cancel")),
+                            child: Text(Strings.instance.cancel)),
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                               restaurant.clearCart();
                             },
-                            child: const Text("Ok")),
+                            child: Text(Strings.instance.ok)),
                       ],
                     ),
                   );
                 },
-                icon: Icon(Icons.delete_sweep, size: 40, color: Colors.red),
+                icon:
+                    const Icon(Icons.delete_sweep, size: 33, color: Colors.red),
               ),
             ],
-            leading: IconButton(
-              padding: const EdgeInsets.only(left: 10),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_circle_left_rounded,
-                size: 40,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
+            leading: BackButton(
+              color: Theme.of(context).colorScheme.inversePrimary,
             ),
             toolbarHeight: 110,
             centerTitle: true,
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: Text(
-              "Cart",
+              Strings.instance.cart,
               style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 25,
                   color: Theme.of(context).colorScheme.inversePrimary),
             ),
           ),
@@ -75,11 +69,11 @@ class CartPage extends StatelessWidget {
                 child: Column(
                   children: [
                     userCart.isEmpty
-                        ? const Expanded(
+                        ? Expanded(
                             child: Center(
                                 child: Text(
-                            "Cart is empty.. ",
-                            style: TextStyle(fontSize: 18),
+                            Strings.instance.cartIsEmpty,
+                            style: const TextStyle(fontSize: 18),
                           )))
                         : Expanded(
                             child: ListView.builder(
@@ -102,7 +96,7 @@ class CartPage extends StatelessWidget {
                       context: context,
                       builder: (context) => AlertDialog(
                         title: Text(
-                          "Choose the payment method ?!",
+                          Strings.instance.chooseThePaymentMethod,
                           style: TextStyle(
                               color:
                                   Theme.of(context).colorScheme.inversePrimary),
@@ -116,7 +110,7 @@ class CartPage extends StatelessWidget {
                                     builder: (context) => const PaymentPage(),
                                   ));
                             },
-                            child: const Text("VISA"),
+                            child: Text(Strings.instance.visa),
                           ),
                           TextButton(
                             onPressed: () {
@@ -127,13 +121,13 @@ class CartPage extends StatelessWidget {
                                     builder: (context) => const HomePage(),
                                   ));
                             },
-                            child: const Text("CACHE"),
+                            child: Text(Strings.instance.cache),
                           ),
                         ],
                       ),
                     );
                   },
-                  text: "Go To CheckOut"),
+                  text: Strings.instance.goToCheckOut),
 
               const SizedBox(
                 height: 25,

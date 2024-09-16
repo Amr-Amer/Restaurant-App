@@ -35,13 +35,11 @@ class _HomePageState extends State<HomePage>
   }
 
   // todo: sort out and return a list of food items
-
   List<Food> _filterMenuByCategory(FoodCategory category, List<Food> fillMenu) {
     return fillMenu.where((food) => food.category == category).toList();
   }
 
   // todo: return list of food in given category
-
   List<Widget> getFoodInThisCategory(List<Food> fullMenu) {
     return FoodCategory.values.map((category) {
       // todo: get category menu
@@ -52,8 +50,7 @@ class _HomePageState extends State<HomePage>
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
-          // todo: get individul food
-
+          // todo: get individual food
           final food = categoryMenu[index];
           return MyFoodTile(
               food: food,
@@ -78,11 +75,11 @@ class _HomePageState extends State<HomePage>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Divider(
-                        indent: 25,
-                        endIndent: 25,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
+                      // Divider(
+                      //   indent: 25,
+                      //   endIndent: 25,
+                      //   color:  Colors.transparent
+                      // ),
                       // my current location
                       MyCurrentLocation(),
 

@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:new_restaurant_app/components/my_arrow_back.dart';
+import 'package:new_restaurant_app/themes/strings.dart';
 import 'package:new_restaurant_app/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -9,16 +10,16 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale == const Locale('ar');
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         centerTitle: true,
         toolbarHeight: 130,
-        leading: MyArrowBack(onPressed: () {
-          Navigator.pop(context);
-        }),
+        leading: const BackButton(),
         title: Text(
-          "Settings",
+          Strings.instance.settings,
           style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
         ),
         backgroundColor: Colors.transparent,
@@ -30,14 +31,14 @@ class SettingsPage extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.circular(25)),
-            margin: EdgeInsets.only(left: 25.0, top: 10.0, right: 25.0),
-            padding: EdgeInsets.all(25.0),
+            margin: const EdgeInsets.only(left: 25.0, top: 10.0, right: 25.0),
+            padding: const EdgeInsets.all(25.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // dark mode
                 Text(
-                  "Dark Mode",
+                  Strings.instance.darkMode,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.inversePrimary),
@@ -49,6 +50,32 @@ class SettingsPage extends StatelessWidget {
                       Provider.of<ThemeProvider>(context, listen: false)
                           .toggleTheme(),
                 )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.circular(25)),
+            margin: const EdgeInsets.only(left: 25.0, top: 10.0, right: 25.0),
+            padding: const EdgeInsets.all(25.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // dark mode
+                Text(
+                  Strings.instance.arabic,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                CupertinoSwitch(
+                    value: isArabic,
+                    onChanged: (value) => context.setLocale(
+                        value ? const Locale('ar') : const Locale('en'))),
               ],
             ),
           ),

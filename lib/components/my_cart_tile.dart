@@ -40,7 +40,7 @@ class MyCartTile extends StatelessWidget {
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text("\$" + cartItem.food.price.toString())

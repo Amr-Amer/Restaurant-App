@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:new_restaurant_app/pages/cart_page.dart';
+import 'package:provider/provider.dart';
+
+import '../models/restaurant.dart';
+import '../themes/strings.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final Widget child;
@@ -9,6 +13,8 @@ class MySliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int cartItemCount = context.watch<Restaurant>().cart.length;
+
     return SliverAppBar(
       backgroundColor: Theme.of(context).colorScheme.background,
       foregroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -19,19 +25,52 @@ class MySliverAppBar extends StatelessWidget {
       pinned: true,
       actions: [
         // cart icon
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () {
-            // go to cart page
-            Navigator.push(
-                context,
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.shopping_cart),
+                onPressed: () {
+                  // Go to cart page
+                  Navigator.push(
+                    context,
                 MaterialPageRoute(
                   builder: (context) => const CartPage(),
-                ));
-          },
+                    ),
+                  );
+                },
+              ),
+              if (cartItemCount > 0)
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 23,
+                      minHeight: 20,
+                    ),
+                    child: Text(
+                      '$cartItemCount',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+            ],
+          ),
         )
       ],
-      title: const Text("Sunset Diner"),
+      title: Text(Strings.instance.sunsetDiner),
       centerTitle: true,
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(

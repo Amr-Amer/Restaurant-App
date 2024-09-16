@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_restaurant_app/components/my_button.dart';
 import 'package:new_restaurant_app/components/my_text_field.dart';
 import 'package:new_restaurant_app/services/auth/auth_service.dart';
+import 'package:new_restaurant_app/themes/strings.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
@@ -31,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
               color: Theme.of(context).colorScheme.inversePrimary,
             ),
             Text(
-              'Lit s Create an Account For You',
+              Strings.instance.litSCreateAnAccountForYou,
               style: TextStyle(
                   fontSize: 16,
                   color: Theme.of(context).colorScheme.inversePrimary),
@@ -41,21 +42,21 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             MyTextField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: Strings.instance.email,
                 obscureText: false),
             const SizedBox(
               height: 10,
             ),
             MyTextField(
                 controller: passwordController,
-                hintText: 'password',
+                hintText: Strings.instance.password,
                 obscureText: true),
             const SizedBox(
               height: 10,
             ),
             MyTextField(
                 controller: confirmedPasswordController,
-                hintText: 'Confirm password',
+                hintText: Strings.instance.confirmPassword,
                 obscureText: true),
             const SizedBox(
               height: 20,
@@ -64,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 onTap: () {
                   register();
                 },
-                text: 'Sign Up'),
+                text: Strings.instance.signUp),
             const SizedBox(
               height: 20,
             ),
@@ -72,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "already have an Account? Login her",
+                  Strings.instance.alreadyHaveAnAccountLoginHer,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary),
                 ),
@@ -81,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 GestureDetector(
                   onTap: widget.onTap,
-                  child: Text('Login Now',
+                  child: Text(Strings.instance.loginNow,
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary,
                           fontWeight: FontWeight.bold)),
@@ -95,12 +96,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void register() async {
-    final _authService = AuthService();
+    final authService = AuthService();
 
     // check if password is match -> create user
     if (passwordController.text == confirmedPasswordController.text) {
       try {
-        await _authService.signUpWithEmailPassword(
+        await authService.signUpWithEmailPassword(
             emailController.text, passwordController.text);
       } catch (e) {
         showDialog(
@@ -116,8 +117,8 @@ class _RegisterPageState extends State<RegisterPage> {
     else {
       showDialog(
         context: context,
-        builder: (context) => const AlertDialog(
-          title: Text("passwords don't match! .. "),
+        builder: (context) => AlertDialog(
+          title: Text(Strings.instance.passwordsDontMatch),
         ),
       );
     }

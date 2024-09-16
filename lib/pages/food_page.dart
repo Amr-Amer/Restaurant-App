@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:new_restaurant_app/components/my_button.dart';
 import 'package:new_restaurant_app/models/food.dart';
 import 'package:new_restaurant_app/models/restaurant.dart';
+import 'package:new_restaurant_app/themes/strings.dart';
 import 'package:provider/provider.dart';
+
+import 'cart_page.dart';
 
 class FoodPage extends StatefulWidget {
   final Food food;
@@ -22,18 +25,49 @@ class FoodPage extends StatefulWidget {
 class _FoodPageState extends State<FoodPage> {
   //todo method to add to cart
   addToCart(Food food, Map<Addon, bool> selectedAddons) {
-    // close the current food page to go back to menu
     Navigator.pop(context);
-
-    // format the selected addons
     List<Addon> currentlySelectedAddons = [];
     for (Addon addon in widget.food.availableAddons) {
       if (widget.selectedAddons[addon] == true) {
         currentlySelectedAddons.add(addon);
       }
     }
-    // add to cart
     context.read<Restaurant>().addToCart(food, currentlySelectedAddons);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        title: Center(
+          child: Text(
+            Strings.instance.productAddToCart,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                fontSize: 22),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CartPage(),
+                ),
+              );
+            },
+            child: Text(Strings.instance.goToCart),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(Strings.instance.completeThePurchase),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -59,8 +93,8 @@ class _FoodPageState extends State<FoodPage> {
                       icon: const Padding(
                         padding: EdgeInsets.only(left: 8.0, top: 8.0),
                         child: Icon(
-                          Icons.arrow_circle_left_sharp,
-                          size: 50,
+                          Icons.arrow_back,
+                          size: 35,
                           color: Colors.white,
                         ),
                       )),
@@ -106,7 +140,7 @@ class _FoodPageState extends State<FoodPage> {
                     ),
                   ),
                   Text(
-                    "Add-Ons",
+                    Strings.instance.addons,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -127,7 +161,6 @@ class _FoodPageState extends State<FoodPage> {
                       itemCount: widget.food.availableAddons.length,
                       itemBuilder: (context, index) {
                         // todo: get individual addon
-
                         Addon addon = widget.food.availableAddons[index];
 
                         return CheckboxListTile(
@@ -149,7 +182,7 @@ class _FoodPageState extends State<FoodPage> {
             ),
             MyButton(
                 onTap: () => addToCart(widget.food, widget.selectedAddons),
-                text: "Add to Cart"),
+                text: Strings.instance.addToCart),
             const SizedBox(
               height: 25,
             ),

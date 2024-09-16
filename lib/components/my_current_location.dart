@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:new_restaurant_app/models/restaurant.dart';
 import 'package:provider/provider.dart';
 
+import '../themes/strings.dart';
+
 class MyCurrentLocation extends StatelessWidget {
   TextEditingController textController = TextEditingController();
 
@@ -9,10 +11,10 @@ class MyCurrentLocation extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Your Location"),
+        title: Text(Strings.instance.yourLocation),
         content: TextField(
           controller: textController,
-          decoration: const InputDecoration(hintText: "Enter Address.."),
+          decoration: InputDecoration(hintText: Strings.instance.enterAddress),
         ),
         actions: [
           MaterialButton(
@@ -23,14 +25,14 @@ class MyCurrentLocation extends StatelessWidget {
               Navigator.pop(context);
               textController.clear();
             },
-            child: const Text("Cancel"),
+            child: Text(Strings.instance.cancel),
           ),
           MaterialButton(
             onPressed: () {
               Navigator.pop(context);
               textController.clear();
             },
-            child: const Text("Save"),
+            child: Text(Strings.instance.ok),
           )
         ],
       ),
@@ -45,7 +47,7 @@ class MyCurrentLocation extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Deliver Now",
+            Strings.instance.deliverNow,
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
           GestureDetector(
@@ -61,7 +63,7 @@ class MyCurrentLocation extends StatelessWidget {
                         color: Theme.of(context).colorScheme.inversePrimary),
                   ),
                 ),
-                Icon(Icons.keyboard_arrow_down_rounded)
+                const Icon(Icons.keyboard_arrow_down_rounded)
               ],
             ),
           )

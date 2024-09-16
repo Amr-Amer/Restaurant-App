@@ -4,6 +4,8 @@ import 'package:new_restaurant_app/pages/login_page.dart';
 import 'package:new_restaurant_app/pages/settings_page.dart';
 import 'package:new_restaurant_app/services/auth/auth_service.dart';
 
+import '../themes/strings.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
@@ -35,14 +37,14 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           MyDrawerTile(
-              text: "H O M E",
+              text: Strings.instance.home,
               icon: Icons.home,
               onTap: () {
                 Navigator.pop(context);
               }),
 
           MyDrawerTile(
-              text: "S E T T I N G S",
+              text: Strings.instance.setting,
               icon: Icons.settings,
               onTap: () {
                 Navigator.pop(context);
@@ -53,10 +55,10 @@ class MyDrawer extends StatelessWidget {
                     ));
               }),
 
-          Spacer(),
+          const Spacer(),
 
           MyDrawerTile(
-              text: "L O G O U T",
+              text: Strings.instance.logOut,
               icon: Icons.logout,
               onTap: () {
                 Navigator.pushReplacement(
@@ -68,7 +70,7 @@ class MyDrawer extends StatelessWidget {
                     ));
               }),
 
-          SizedBox(
+          const SizedBox(
             height: 30,
           )
         ],
